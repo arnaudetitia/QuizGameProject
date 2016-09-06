@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="9"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Exemple de texte qui devrait rjzdbvchbgfdvhisdvngojrdnvjgrfsd"
+            android:id="@+id/question_field"
+            android:gravity="center_horizontal"
+            android:textSize="20dp"
+            android:background="@drawable/question_field_shape"
+            android:textAlignment="center"
+            android:padding="20dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="New Button"
+                android:id="@+id/button_left_answer"
+                android:background="@drawable/button_shape"
+                android:textColor="#FFFFFF" />
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="New Button"
+                android:id="@+id/button_right_answer"
+                android:background="@drawable/button_shape"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ProgressBar
+        style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:id="@+id/timerBar"
+        android:background="@drawable/timer_bar"
+        android:layout_alignParentRight="true"
+        android:progress="90"
+        android:max="100"
+        android:layout_weight="1"
+        android:progressDrawable="@drawable/timer_bar" />
+
+</LinearLayout>

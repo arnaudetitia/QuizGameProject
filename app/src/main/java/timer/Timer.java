@@ -1,0 +1,62 @@
+package timer;
+
+import android.app.Activity;
+import android.util.Log;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+/**
+ * Created by Arnaud ETITIA on 06/09/2016.
+ */
+public class Timer {
+
+    Activity mGameActivity;
+    ProgressBar mProgressBar;
+    int mProgress;
+    int mMaxProgress;
+
+    private boolean mWinner;
+
+    Thread timerThread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+                while(mProgress > 0) {
+                    mProgress -= 100;
+                    mProgressBar.setProgress(mProgress);
+                    Thread.sleep(100);
+                    if (mProgress == 0 || mWinner) {
+                        throw new TimerException("Terminé");
+                    }
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (TimerException e) {
+                e.printStackTrace();
+                if (mWinner){
+                    mWinner = false;
+                }
+                mGameActivity.finish();
+            }
+        }
+    });
+
+    public Timer(Activity gameActivity,ProgressBar progressBar, int maxProgress) {
+        this.mGameActivity = gameActivity;
+        this.mProgress = maxProgress;
+        this.mMaxProgress = maxProgress;
+
+        this.mProgressBar = progressBar;
+        this.mProgressBar.setMax(maxProgress);
+        this.mProgressBar.setProgress(mProgress);
+        mWinner = false;
+    }
+
+    public void startTimer(){
+        timerThread.start();
+    }
+
+    public void win(){
+        mWinner = true;
+    }
+}
