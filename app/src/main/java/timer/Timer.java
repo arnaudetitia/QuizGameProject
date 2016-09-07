@@ -1,16 +1,17 @@
 package timer;
 
-import android.app.Activity;
 import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.example.arnaudetitia.quizgameproject.ui.GameActivity;
 
 /**
  * Created by Arnaud ETITIA on 06/09/2016.
  */
 public class Timer {
 
-    Activity mGameActivity;
+    GameActivity mGameActivity;
     ProgressBar mProgressBar;
     int mProgress;
     int mMaxProgress;
@@ -36,12 +37,12 @@ public class Timer {
                 if (mWinner){
                     mWinner = false;
                 }
-                mGameActivity.finish();
+                mGameActivity.launchEndGame();
             }
         }
     });
 
-    public Timer(Activity gameActivity,ProgressBar progressBar, int maxProgress) {
+    public Timer(GameActivity gameActivity,ProgressBar progressBar, int maxProgress) {
         this.mGameActivity = gameActivity;
         this.mProgress = maxProgress;
         this.mMaxProgress = maxProgress;
