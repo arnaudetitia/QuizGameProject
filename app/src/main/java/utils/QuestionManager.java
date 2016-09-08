@@ -1,9 +1,9 @@
 package utils;
 
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.example.arnaudetitia.quizgameproject.ui.GameActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,32 +15,32 @@ import java.net.URL;
 /**
  * Created by Arnaud ETITIA on 07/09/2016.
  */
-public class QuestionManager implements OnQuestionSelected{
+public class QuestionManager implements OnQuestionSelected {
 
     String mQuestion;
     String mRightAnswer;
-    String mWrongAnswer;
 
     TextView mQuestionField;
     Button mRightButton;
-    Button mWrongButton;
 
     String mURL = "http://192.168.1.17/androidquizserver/getQuestion.php?id=";
 
-    public QuestionManager(TextView questionField, Button rightButton , Button wrongButton) {
+    public QuestionManager(TextView questionField) {
         mQuestionField = questionField;
-        mRightButton = rightButton;
-        mWrongButton = wrongButton;
     }
 
     public void setQuestion(int idQuestion){
         try {
-            URL url = new URL(mURL.concat(String.valueOf(4)));
+            URL url = new URL(mURL.concat(String.valueOf(idQuestion)));
             DBConnector connector = new DBConnector(QuestionManager.this,url);
             connector.execute();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setRightButton(Button button){
+        mRightButton = button;
     }
 
     @Override
@@ -53,10 +53,12 @@ public class QuestionManager implements OnQuestionSelected{
 
             mQuestionField.setText(mQuestion);
             mRightButton.setText(mRightAnswer);
-            mWrongButton.setText("Pas là");
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
 
+    public Button getRightButton() {
+        return mRightButton;
     }
 }

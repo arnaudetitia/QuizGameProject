@@ -15,12 +15,12 @@ import java.net.URL;
 /**
  * Created by Arnaud ETITIA on 07/09/2016.
  */
-public class DBConnector  extends AsyncTask<String,String,String>{
+public class DBConnector extends AsyncTask<String,String,String>{
 
     URL mUrl;
-    OnQuestionSelected listener;
+    OnRequestExecuted listener;
 
-    public DBConnector(OnQuestionSelected listener,URL mUrl) {
+    public DBConnector(OnRequestExecuted listener, URL mUrl) {
         this.mUrl = mUrl;
         this.listener = listener;
     }
@@ -32,7 +32,6 @@ public class DBConnector  extends AsyncTask<String,String,String>{
             HttpURLConnection con = (HttpURLConnection) mUrl.openConnection();
             BufferedReader buffer = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String result = getFromBufferReader(buffer);
-
             return result;
         } catch (Exception e) {
             e.printStackTrace();

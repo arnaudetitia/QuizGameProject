@@ -42,20 +42,25 @@ public class Timer {
         }
     });
 
-    public Timer(GameActivity gameActivity,ProgressBar progressBar, int maxProgress) {
+    public Timer(GameActivity gameActivity,ProgressBar progressBar) {
         this.mGameActivity = gameActivity;
-        this.mProgress = maxProgress;
-        this.mMaxProgress = maxProgress;
-
         this.mProgressBar = progressBar;
-        this.mProgressBar.setMax(maxProgress);
-        this.mProgressBar.setProgress(mProgress);
         mWinner = false;
+    }
+
+    public void setTimer(int nbSecond){
+        this.mMaxProgress = nbSecond*1000;
+        this.mProgress = this.mMaxProgress;
+
+        this.mProgressBar.setMax(this.mMaxProgress);
+        this.mProgressBar.setProgress(this.mProgress);
     }
 
     public void startTimer(){
         timerThread.start();
     }
+
+
 
     public void win(){
         mWinner = true;
