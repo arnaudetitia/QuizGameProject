@@ -1,4 +1,4 @@
-package utils;
+package com.example.arnaudetitia.quizgameproject.utils;
 
 /**
  * Created by Arnaud ETITIA on 07/09/2016.

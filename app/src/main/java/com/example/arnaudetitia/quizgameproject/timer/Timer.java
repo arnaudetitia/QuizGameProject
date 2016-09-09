@@ -1,8 +1,6 @@
-package timer;
+package com.example.arnaudetitia.quizgameproject.timer;
 
-import android.util.Log;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.arnaudetitia.quizgameproject.ui.GameActivity;
 

@@ -4,23 +4,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.arnaudetitia.quizgameproject.R;
 
-import timer.Timer;
-import utils.Mode;
-import utils.QuestionManager;
-import utils.WrongAnswerManager;
+import com.example.arnaudetitia.quizgameproject.timer.Timer;
+import com.example.arnaudetitia.quizgameproject.utils.Mode;
+import com.example.arnaudetitia.quizgameproject.utils.QuestionManager;
+import com.example.arnaudetitia.quizgameproject.utils.WrongAnswerManager;
 
 public class GameActivity extends Activity {
 

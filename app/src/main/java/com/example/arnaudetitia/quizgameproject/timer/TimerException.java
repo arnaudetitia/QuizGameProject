@@ -1,4 +1,4 @@
-package timer;
+package com.example.arnaudetitia.quizgameproject.timer;
 
 /**
  * Created by Arnaud ETITIA on 06/09/2016.

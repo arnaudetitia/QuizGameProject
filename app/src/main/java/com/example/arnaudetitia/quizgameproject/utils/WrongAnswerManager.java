@@ -1,4 +1,4 @@
-package utils;
+package com.example.arnaudetitia.quizgameproject.utils;
 
 import android.widget.Button;
 
