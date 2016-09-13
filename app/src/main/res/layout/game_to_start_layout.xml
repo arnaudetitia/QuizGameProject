@@ -4,29 +4,6 @@
     android:layout_height="match_parent"
     android:background="#990099">
 
-    <Button
-        android:id="@+id/start_game_button"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:text="Start"
-        android:background="@drawable/button_shape"
-        android:layout_weight="1"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="50dp"
-        android:textColor="#FFFFFF"
-        android:textSize="50sp" />
 
-    <TextView
-        android:id="@+id/rules_field"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="50dp"
-
-        android:text="Règles : \n"
-        android:textSize="30sp"
-        android:textColor="#FFFFFF"
-        android:textAlignment="center"/>
 
 </LinearLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context="com.example.arnaudetitia.quizgameproject.ui.NextLevelActivity"
+    android:background="#990099">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            android:id="@+id/imageView"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/level_won_icon"
+            android:layout_weight="50"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Niveau suivant : \n"
+            android:id="@+id/next_level_field"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:textSize="30sp"
+            android:layout_weight="25"
+            android:textAlignment="center" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:id="@+id/start_next_level_button"
+            android:background="@drawable/button_shape"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="25"
+            android:textAlignment="gravity"
+            android:textColor="#ffffff"
+            android:textSize="30sp" />
+    </LinearLayout>
+</RelativeLayout>

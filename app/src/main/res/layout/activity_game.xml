@@ -7,9 +7,6 @@
     tools:context=".ui.GameActivity"
     android:background="#990099">
 
-    <include android:id="@+id/layout_game_to_start"
-        layout="@layout/game_to_start_layout"/>
-
     <include
         android:id="@+id/layout_game_started"
         layout="@layout/game_started_layout" />

@@ -26,7 +26,7 @@ public class HomeActivity extends Activity {
         mAventureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(HomeActivity.this,GameActivity.class);
+                Intent i = new Intent(HomeActivity.this,StartGameActivity.class);
                 i.putExtra("mode",Mode.AVENTURE);
                 startActivity(i);
             }
@@ -36,7 +36,7 @@ public class HomeActivity extends Activity {
         mCLMButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(HomeActivity.this,GameActivity.class);
+                Intent i = new Intent(HomeActivity.this,StartGameActivity.class);
                 i.putExtra("mode",Mode.CLM);
                 startActivity(i);
             }
@@ -46,7 +46,7 @@ public class HomeActivity extends Activity {
         mSurvieButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(HomeActivity.this,GameActivity.class);
+                Intent i = new Intent(HomeActivity.this,StartGameActivity.class);
                 i.putExtra("mode",Mode.SURVIE);
                 startActivity(i);
             }

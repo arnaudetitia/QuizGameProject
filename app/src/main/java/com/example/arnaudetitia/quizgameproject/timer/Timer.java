@@ -1,5 +1,6 @@
 package com.example.arnaudetitia.quizgameproject.timer;
 
+import android.util.Log;
 import android.widget.ProgressBar;
 
 import com.example.arnaudetitia.quizgameproject.ui.GameActivity;
@@ -16,29 +17,7 @@ public class Timer {
 
     private boolean mWinner;
 
-    Thread timerThread = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            try {
-                while(mProgress > 0) {
-                    mProgress -= 100;
-                    mProgressBar.setProgress(mProgress);
-                    Thread.sleep(100);
-                    if (mProgress == 0 || mWinner) {
-                        throw new TimerException("Terminé");
-                    }
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (TimerException e) {
-                e.printStackTrace();
-                if (mWinner){
-                    mWinner = false;
-                }
-                mGameActivity.launchEndGame();
-            }
-        }
-    });
+    Thread timerThread;
 
     public Timer(GameActivity gameActivity,ProgressBar progressBar) {
         this.mGameActivity = gameActivity;
@@ -55,12 +34,46 @@ public class Timer {
     }
 
     public void startTimer(){
+        timerThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while(true) {
+                        mProgress -= 100;
+                        mProgressBar.setProgress(mProgress);
+                        Thread.sleep(100);
+                        Log.d("Debug:Resume",mProgress + "");
+                        if (mProgress == 0 || mWinner) {
+                            throw new InterruptedException();
+                        }
+                    }
+                } catch (InterruptedException e) {
+                    if (!mWinner) {
+                        mGameActivity.endGame();
+                    }
+                    else
+                    {
+                        mWinner = false;
+                    }
+                }
+            }
+        });
         timerThread.start();
     }
 
+    public void addToTimer(int nbSecond){
+        this.mProgress += nbSecond*1000;
 
+        this.mProgressBar.setProgress(mProgress);
+    }
 
-    public void win(){
+    public void subToTimer(int nbMillis){
+        this.mProgress -= nbMillis;
+
+        this.mProgressBar.setProgress(mProgress);
+    }
+
+    public void makeWin(){
         mWinner = true;
     }
 }

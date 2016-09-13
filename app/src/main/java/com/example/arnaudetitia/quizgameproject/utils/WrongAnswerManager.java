@@ -2,6 +2,8 @@ package com.example.arnaudetitia.quizgameproject.utils;
 
 import android.widget.Button;
 
+import com.example.arnaudetitia.quizgameproject.listener.OnWrongAnswerSelected;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

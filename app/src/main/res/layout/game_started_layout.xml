@@ -34,9 +34,9 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:text="New Button"
                 android:id="@+id/button_left_answer"
                 android:background="@drawable/button_shape"
+
                 android:textColor="#FFFFFF" />
 
             <Space
@@ -47,11 +47,18 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:text="New Button"
                 android:id="@+id/button_right_answer"
                 android:background="@drawable/button_shape"
+
                 android:textColor="#ffffff" />
         </LinearLayout>
+
+        <include android:id="@+id/indication_clm_field"
+            layout="@layout/score_layout"/>
+
+        <include android:id="@+id/indication_aventure_field"
+            layout="@layout/aventure_layout"/>
+
 
     </LinearLayout>
 

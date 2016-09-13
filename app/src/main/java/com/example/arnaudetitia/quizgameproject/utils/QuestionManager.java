@@ -3,6 +3,8 @@ package com.example.arnaudetitia.quizgameproject.utils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.arnaudetitia.quizgameproject.listener.OnQuestionSelected;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

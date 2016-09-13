@@ -2,6 +2,8 @@ package com.example.arnaudetitia.quizgameproject.utils;
 
 import android.os.AsyncTask;
 
+import com.example.arnaudetitia.quizgameproject.listener.OnRequestExecuted;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
