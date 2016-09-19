@@ -21,7 +21,7 @@ public class WrongAnswerManager implements OnWrongAnswerSelected {
 
     Button mWrongButton;
 
-    String mURL = "http://192.168.1.17/androidquizserver/getWrongAnswers.php?id=";
+    String mURL = "http://192.168.1.17:81/androidquizserver/getWrongAnswers.php?id=";
 
 
     public void setWrongAnswer(int idQuestion){

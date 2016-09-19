@@ -6,6 +6,27 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/HomeStyle</item>
     </style>
+
+    <style name="HomeStyle" parent="AppTheme">
+        <item name="android:windowEnterAnimation">@anim/enter_left_animation</item>
+        <item name="android:windowExitAnimation">@anim/exit_right_transition</item>
+    </style>
+
+    <style name="StartGameSyle" parent="AppTheme">
+        <item name="android:windowEnterAnimation">@anim/enter_right_transition</item>
+        <item name="android:windowExitAnimation">@anim/exit_down_transition</item>
+    </style>
+
+    <style name="NextLevelStyle" parent="AppTheme">
+        <item name="android:windowEnterAnimation">@anim/enter_down_transition</item>
+        <item name="android:windowExitAnimation">@anim/exit_up_transition</item>
+    </style>
+
+    <style name="EndGame" parent="AppTheme">
+        <item name="android:windowExitAnimation">@anim/exit_right_transition</item>
+    </style>
+
 
 </resources>

@@ -23,7 +23,7 @@ public class AventureActionManager extends ActionManager implements OnLevelSelec
     ProgressBar mProgressBar;
     int mGoal;
     boolean mConsecutive;
-    String mURL = "http://192.168.1.17/androidquizserver/getLevel.php?level=";
+    String mURL = "http://192.168.1.17:81/androidquizserver/getLevel.php?level=";
 
     public AventureActionManager(GameActivity ga,ProgressBar mProgressBar) {
         this.mGameActivity = ga;

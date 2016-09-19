@@ -16,6 +16,7 @@ public class Timer {
     int mMaxProgress;
 
     private boolean mWinner;
+    private boolean mOnPause;
 
     Thread timerThread;
 
@@ -23,6 +24,7 @@ public class Timer {
         this.mGameActivity = gameActivity;
         this.mProgressBar = progressBar;
         mWinner = false;
+        mOnPause = false;
     }
 
     public void setTimer(int nbSecond){
@@ -34,30 +36,7 @@ public class Timer {
     }
 
     public void startTimer(){
-        timerThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while(true) {
-                        mProgress -= 100;
-                        mProgressBar.setProgress(mProgress);
-                        Thread.sleep(100);
-                        Log.d("Debug:Resume",mProgress + "");
-                        if (mProgress == 0 || mWinner) {
-                            throw new InterruptedException();
-                        }
-                    }
-                } catch (InterruptedException e) {
-                    if (!mWinner) {
-                        mGameActivity.endGame();
-                    }
-                    else
-                    {
-                        mWinner = false;
-                    }
-                }
-            }
-        });
+        timerThread = new Thread(mTimerRunnable);
         timerThread.start();
     }
 
@@ -76,4 +55,37 @@ public class Timer {
     public void makeWin(){
         mWinner = true;
     }
+
+    public void pauseTimer(){
+        mOnPause = true;
+    }
+
+    public void restartTimer(){
+        mOnPause = false;
+    }
+
+    Runnable mTimerRunnable = new Runnable(){
+        @Override
+        public void run() {
+            try {
+                while(true) {
+                    mProgress -= mOnPause ? 0 : 100;
+                    mProgressBar.setProgress(mProgress);
+                    Thread.sleep(100);
+                    Log.d("Debug:Resume",mProgress + "");
+                    if (mProgress == 0 || mWinner) {
+                        throw new InterruptedException();
+                    }
+                }
+            } catch (InterruptedException e) {
+                if (!mWinner) {
+                    mGameActivity.endGame();
+                }
+                else
+                {
+                    mWinner = false;
+                }
+            }
+        }
+    };
 }

@@ -19,9 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.GameActivity" />
-        <activity android:name=".ui.EndGameActivity" />
-        <activity android:name=".ui.NextLevelActivity" />
-        <activity android:name=".ui.StartGameActivity"></activity>
+        <activity android:name=".ui.EndGameActivity"/>
+        <activity android:name=".ui.NextLevelActivity"/>
+        <activity android:name=".ui.StartGameActivity"/>
     </application>
 
 </manifest>

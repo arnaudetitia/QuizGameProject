@@ -1,6 +1,8 @@
 package com.example.arnaudetitia.quizgameproject.ui;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -43,6 +45,8 @@ public class GameActivity extends Activity {
 
     QuestionManager mQuestionManager;
     WrongAnswerManager mWrongManager;
+
+    FragmentManager mFragManager;
 
     int mMode;
     boolean normalQuestionMode;
@@ -96,6 +100,8 @@ public class GameActivity extends Activity {
         mQuestionManager = new QuestionManager(mQuestionField);
         mWrongManager = new WrongAnswerManager();
 
+        mFragManager = getFragmentManager();
+
         initRules();
 
         changeQuestion();
@@ -143,7 +149,9 @@ public class GameActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        mTimer.pauseTimer();
+        QuitGameDialog quitDialog = new QuitGameDialog();
+        quitDialog.show(mFragManager,"Quit Game");
     }
 
     public void endGame() {
@@ -184,5 +192,13 @@ public class GameActivity extends Activity {
 
     public void setTimeToTimer(int time){
         mTimer.setTimer(time);
+    }
+
+    public void quitGame(){
+        finish();
+    }
+
+    public void restartGame(){
+        mTimer.restartTimer();
     }
 }
