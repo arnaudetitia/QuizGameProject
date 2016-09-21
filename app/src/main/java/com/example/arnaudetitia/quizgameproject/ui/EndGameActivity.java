@@ -18,6 +18,8 @@ public class EndGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_game);
 
+        getWindow().getAttributes().windowAnimations = R.style.EndGameStyle;
+
        back_button = (Button) findViewById(R.id.button_back);
        back_button.setOnClickListener(new View.OnClickListener() {
            @Override

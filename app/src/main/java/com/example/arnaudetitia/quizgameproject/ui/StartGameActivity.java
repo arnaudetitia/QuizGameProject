@@ -26,6 +26,8 @@ public class StartGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
 
+        getWindow().getAttributes().windowAnimations = R.style.StartGameSyle;
+
         mMode = getIntent().getIntExtra("mode",0);
         mRulesField = (TextView) findViewById(R.id.rules_field);
         

@@ -23,7 +23,7 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
 
         getWindow().getAttributes().windowAnimations = R.style.HomeStyle;
-        System.out.println("Debug " + getWindow().getAttributes().windowAnimations);
+
         mAventureButton = (Button) findViewById(R.id.button_aventure);
         mAventureButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -19,6 +19,8 @@ public class NextLevelActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next_level);
 
+        getWindow().getAttributes().windowAnimations = R.style.NextLevelStyle;
+
         mNextLevel = (Button) findViewById(R.id.start_next_level_button);
         mNextLevel.setOnClickListener(new View.OnClickListener() {
             @Override
