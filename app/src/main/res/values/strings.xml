@@ -3,4 +3,6 @@
     <string name="dialog_question_string">Quitter le jeu ?</string>
     <string name="dialog_quit">Quitter</string>
     <string name="dialog_stay">Annuler</string>
+    <string name="string_clm_rule">Marquez un maximum de points en 1 minute.</string>
+    <string name="string_survie_rule">Tentez de survivre le plus longtemps possible !</string>
 </resources>

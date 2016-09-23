@@ -51,11 +51,11 @@ public class StartGameActivity extends Activity {
             return;
         }
         if (mMode == Mode.CLM){
-            mRulesField.append("mode Contre La montre");
+            mRulesField.append(getString(R.string.string_clm_rule));
             return;
         }
         if (mMode == Mode.SURVIE){
-            mRulesField.append("mode Survie");
+            mRulesField.append(getString(R.string.string_survie_rule));
             return;
         }
     }

@@ -1,15 +1,11 @@
 package com.example.arnaudetitia.quizgameproject.ui;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -24,7 +20,6 @@ import com.example.arnaudetitia.quizgameproject.action.SurvieActionManager;
 import com.example.arnaudetitia.quizgameproject.timer.Timer;
 import com.example.arnaudetitia.quizgameproject.utils.Mode;
 import com.example.arnaudetitia.quizgameproject.utils.QuestionManager;
-import com.example.arnaudetitia.quizgameproject.utils.WrongAnswerManager;
 
 public class GameActivity extends Activity {
 
@@ -44,7 +39,6 @@ public class GameActivity extends Activity {
     AventureActionManager mAventureManager;
 
     QuestionManager mQuestionManager;
-    WrongAnswerManager mWrongManager;
 
     FragmentManager mFragManager;
 
@@ -98,7 +92,6 @@ public class GameActivity extends Activity {
         });
 
         mQuestionManager = new QuestionManager(mQuestionField);
-        mWrongManager = new WrongAnswerManager();
 
         mFragManager = getFragmentManager();
 
@@ -172,16 +165,14 @@ public class GameActivity extends Activity {
 
         if (leftRightanswer){
             mQuestionManager.setRightButton(mLeftButton);
-            mWrongManager.setWrongButton(mRightButton);
+            mQuestionManager.setWrongButton(mRightButton);
         }
         else {
             mQuestionManager.setRightButton(mRightButton);
-            mWrongManager.setWrongButton(mLeftButton);
+            mQuestionManager.setWrongButton(mLeftButton);
         }
 
         mQuestionManager.setQuestion(index);
-
-        mWrongManager.setWrongAnswer(index);
     }
 
     public void makeWin(){

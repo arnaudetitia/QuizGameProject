@@ -72,7 +72,6 @@ public class Timer {
                     mProgress -= mOnPause ? 0 : 100;
                     mProgressBar.setProgress(mProgress);
                     Thread.sleep(100);
-                    Log.d("Debug:Resume",mProgress + "");
                     if (mProgress == 0 || mWinner) {
                         throw new InterruptedException();
                     }

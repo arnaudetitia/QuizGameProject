@@ -19,9 +19,11 @@ public class QuestionManager implements OnQuestionSelected {
 
     String mQuestion;
     String mRightAnswer;
+    String mWrongAnswer;
 
     TextView mQuestionField;
     Button mRightButton;
+    Button mWrongButton;
 
     String mURL = "http://192.168.1.17:81/androidquizserver/getQuestion.php?id=";
 
@@ -43,16 +45,21 @@ public class QuestionManager implements OnQuestionSelected {
         mRightButton = button;
     }
 
+    public void setWrongButton(Button button){ mWrongButton = button;}
+
     @Override
     public void done(String result) {
         try {
-            JSONArray array = new JSONArray(result);
-            JSONObject object = array.getJSONObject(0);
+            JSONObject object = new JSONObject(result);
             mQuestion = object.getString("question");
-            mRightAnswer = object.getString("reponse");
+            mRightAnswer = object.getString("right");
+            JSONArray wrong = object.getJSONArray("wrong");
+            JSONObject wrongAnswerSelected = wrong.getJSONObject((int)(Math.random()*wrong.length()));
+            mWrongAnswer = wrongAnswerSelected.getString("reponse");
 
             mQuestionField.setText(mQuestion);
             mRightButton.setText(mRightAnswer);
+            mWrongButton.setText(mWrongAnswer);
         } catch (JSONException e) {
             e.printStackTrace();
         }
