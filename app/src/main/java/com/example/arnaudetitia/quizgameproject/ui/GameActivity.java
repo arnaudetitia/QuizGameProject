@@ -17,11 +17,16 @@ import com.example.arnaudetitia.quizgameproject.action.ActionManager;
 import com.example.arnaudetitia.quizgameproject.action.AventureActionManager;
 import com.example.arnaudetitia.quizgameproject.action.CLMActionManager;
 import com.example.arnaudetitia.quizgameproject.action.SurvieActionManager;
+import com.example.arnaudetitia.quizgameproject.listener.OnAnswerChecked;
 import com.example.arnaudetitia.quizgameproject.timer.Timer;
+import com.example.arnaudetitia.quizgameproject.utils.CheckAnswerManager;
 import com.example.arnaudetitia.quizgameproject.utils.Mode;
 import com.example.arnaudetitia.quizgameproject.utils.QuestionManager;
 
-public class GameActivity extends Activity {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class GameActivity extends Activity implements OnAnswerChecked{
 
     TextView mScoreField;
 
@@ -39,7 +44,7 @@ public class GameActivity extends Activity {
     AventureActionManager mAventureManager;
 
     QuestionManager mQuestionManager;
-
+    CheckAnswerManager mCheckAnswerManager;
     FragmentManager mFragManager;
 
     int mMode;
@@ -73,10 +78,9 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Button b = (Button) v;
-                boolean rightAnswer = b.equals(mQuestionManager.getRightButton());
-                if (rightAnswer == normalQuestionMode) mManager.goodAction();
-                else mManager.badAction();
-                changeQuestion();
+                mCheckAnswerManager.setQuestion(mQuestionField.getText().toString());
+                mCheckAnswerManager.setAnswer(b.getText().toString());
+                mCheckAnswerManager.checkAnswer();
             }
         });
 
@@ -84,14 +88,15 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Button b = (Button) v;
-                boolean rightAnswer = b.equals(mQuestionManager.getRightButton());
-                if (rightAnswer == normalQuestionMode) mManager.goodAction();
-                else mManager.badAction();
-                changeQuestion();
+                mCheckAnswerManager.setQuestion(mQuestionField.getText().toString());
+                mCheckAnswerManager.setAnswer(b.getText().toString());
+                mCheckAnswerManager.checkAnswer();
             }
         });
 
         mQuestionManager = new QuestionManager(mQuestionField);
+
+        mCheckAnswerManager = new CheckAnswerManager(this);
 
         mFragManager = getFragmentManager();
 
@@ -191,5 +196,25 @@ public class GameActivity extends Activity {
 
     public void restartGame(){
         mTimer.restartTimer();
+    }
+
+    @Override
+    public void done(String result) {
+        try {
+            JSONObject object= new JSONObject(result);
+            boolean goodAnswer = object.getBoolean("goodAnswer");
+
+
+            if (goodAnswer == normalQuestionMode){
+                mManager.goodAction();
+            }
+            else {
+                mManager.badAction();
+            }
+
+            changeQuestion();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
