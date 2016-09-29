@@ -47,7 +47,7 @@ public class StartGameActivity extends Activity {
     
     private void initRules() {
         if (mMode == Mode.AVENTURE){
-            mRulesField.append("mode Aventure");
+            mRulesField.append(getString(R.string.aventure_rules_field));
             return;
         }
         if (mMode == Mode.CLM){

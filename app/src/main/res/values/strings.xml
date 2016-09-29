@@ -5,4 +5,6 @@
     <string name="dialog_stay">Annuler</string>
     <string name="string_clm_rule">Marquez un maximum de points en 1 minute.</string>
     <string name="string_survie_rule">Tentez de survivre le plus longtemps possible !</string>
+    <string name="next_level_text">Marquez %1$d points %2$s en %3$d secondes !</string>
+    <string name="aventure_rules_field">Marqué 5 points en 45 secondes</string>
 </resources>

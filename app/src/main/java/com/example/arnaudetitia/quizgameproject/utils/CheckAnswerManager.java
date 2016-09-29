@@ -23,20 +23,12 @@ public class CheckAnswerManager {
 
     public void checkAnswer(){
         try{
-            mQuestion = mQuestion.replace(" ","%20");
-            byte[] questionBytes = mQuestion.getBytes("ASCII");
-            mQuestion = new String(questionBytes);
-            mAnswer = mAnswer.replace(" ","%20");
-            byte[] answerBytes = mQuestion.getBytes("ASCII");
-            mAnswer = new String(answerBytes);
-
+            formatToHTML();
             URL url = new URL(mURL.concat(mQuestion).concat("&r=").concat(mAnswer));
             System.out.println(url);
             DBConnector connector = new DBConnector(mGameActivity,url);
             connector.execute();
         } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
@@ -47,5 +39,21 @@ public class CheckAnswerManager {
 
     public void setAnswer(String mAnswer) {
         this.mAnswer = mAnswer;
+    }
+
+    private void formatToHTML(){
+        mQuestion = mQuestion.replace(" ","%20");
+        mQuestion.replace("é","e");
+        mQuestion.replace("è","e");
+        mQuestion.replace("ê","e");
+        mQuestion.replace("ç","c");
+        mQuestion.replace("'","%27");
+
+        mAnswer = mAnswer.replace(" ","%20");
+        mAnswer.replace("é","e");
+        mAnswer.replace("è","e");
+        mAnswer.replace("ê","e");
+        mAnswer.replace("ç","c");
+        mAnswer.replace("'","%27");
     }
 }

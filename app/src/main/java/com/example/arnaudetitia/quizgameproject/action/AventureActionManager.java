@@ -1,9 +1,11 @@
 package com.example.arnaudetitia.quizgameproject.action;
 
+import android.content.Intent;
 import android.widget.ProgressBar;
 
 import com.example.arnaudetitia.quizgameproject.listener.OnLevelSelected;
 import com.example.arnaudetitia.quizgameproject.ui.GameActivity;
+import com.example.arnaudetitia.quizgameproject.ui.NextLevelActivity;
 import com.example.arnaudetitia.quizgameproject.utils.DBConnector;
 
 import org.json.JSONArray;
@@ -22,14 +24,14 @@ public class AventureActionManager extends ActionManager implements OnLevelSelec
     GameActivity mGameActivity;
     ProgressBar mProgressBar;
     int mGoal;
+    int mTime;
     boolean mConsecutive;
     String mURL = "http://192.168.1.17:81/androidquizserver/getLevel.php?level=";
 
     public AventureActionManager(GameActivity ga,ProgressBar mProgressBar) {
         this.mGameActivity = ga;
         this.mProgressBar = mProgressBar;
-        mLevel = 0;
-        setNextLevel();
+        mLevel = 1;
     }
 
     public void setGoal(int goal){
@@ -80,11 +82,31 @@ public class AventureActionManager extends ActionManager implements OnLevelSelec
 
             this.setGoal(lvl.getInt("goal"));
             this.setConsecutive(lvl.getInt("consecutive") == 1);
-            this.mGameActivity.setTimeToTimer(lvl.getInt("time"));
+            this.mTime = lvl.getInt("time");
+            this.mGameActivity.setTimeToTimer(mTime);
 
             resetProgress();
+
+            Intent intent = new Intent(mGameActivity,NextLevelActivity.class);
+            intent.putExtra("time",getTime());
+            intent.putExtra("goal",getGoal());
+            intent.putExtra("consecutive",isConsecutive());
+            mGameActivity.startActivity(intent);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getTime() {
+        return mTime;
+    }
+
+    public int getGoal() {
+        return mGoal;
+    }
+
+    public boolean isConsecutive() {
+        return mConsecutive;
     }
 }

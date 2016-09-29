@@ -99,20 +99,10 @@ public class GameActivity extends Activity implements OnAnswerChecked{
         mCheckAnswerManager = new CheckAnswerManager(this);
 
         mFragManager = getFragmentManager();
-
         initRules();
-
         changeQuestion();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (mMode == Mode.AVENTURE) {
-            mAventureManager.setNextLevel();
-            mManager = mAventureManager;
-        }
-    }
 
     @Override
     protected void onResume() {
@@ -181,9 +171,9 @@ public class GameActivity extends Activity implements OnAnswerChecked{
     }
 
     public void makeWin(){
+        mAventureManager.setNextLevel();
+        mManager = mAventureManager;
         mTimer.makeWin();
-        Intent intent = new Intent(GameActivity.this,NextLevelActivity.class);
-        startActivity(intent);
     }
 
     public void setTimeToTimer(int time){
@@ -204,6 +194,7 @@ public class GameActivity extends Activity implements OnAnswerChecked{
             JSONObject object= new JSONObject(result);
             boolean goodAnswer = object.getBoolean("goodAnswer");
 
+            System.out.println( goodAnswer + " " + normalQuestionMode);
 
             if (goodAnswer == normalQuestionMode){
                 mManager.goodAction();

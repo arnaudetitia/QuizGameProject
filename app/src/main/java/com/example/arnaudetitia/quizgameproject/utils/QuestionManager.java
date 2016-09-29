@@ -65,7 +65,4 @@ public class QuestionManager implements OnQuestionSelected {
         }
     }
 
-    public Button getRightButton() {
-        return mRightButton;
-    }
 }
