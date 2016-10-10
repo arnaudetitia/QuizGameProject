@@ -25,15 +25,15 @@ public class QuestionManager implements OnQuestionSelected {
     Button mRightButton;
     Button mWrongButton;
 
-    String mURL = "http://192.168.1.17:81/androidquizserver/getQuestion.php?id=";
+    String mURL = "http://192.168.1.17:81/androidquizserver/getQuestion.php";
 
     public QuestionManager(TextView questionField) {
         mQuestionField = questionField;
     }
 
-    public void setQuestion(int idQuestion){
+    public void setQuestion(){
         try {
-            URL url = new URL(mURL.concat(String.valueOf(idQuestion)));
+            URL url = new URL(mURL);
             DBConnector connector = new DBConnector(QuestionManager.this,url);
             connector.execute();
         } catch (MalformedURLException e) {

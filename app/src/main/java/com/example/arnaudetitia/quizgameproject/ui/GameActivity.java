@@ -167,7 +167,7 @@ public class GameActivity extends Activity implements OnAnswerChecked{
             mQuestionManager.setWrongButton(mLeftButton);
         }
 
-        mQuestionManager.setQuestion(index);
+        mQuestionManager.setQuestion();
     }
 
     public void makeWin(){

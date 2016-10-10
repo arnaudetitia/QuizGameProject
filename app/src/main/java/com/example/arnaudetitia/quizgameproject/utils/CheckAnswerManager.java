@@ -2,10 +2,8 @@ package com.example.arnaudetitia.quizgameproject.utils;
 
 import com.example.arnaudetitia.quizgameproject.ui.GameActivity;
 
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 /**
  * Created by Arnaud ETITIA on 26/09/2016.
@@ -43,17 +41,17 @@ public class CheckAnswerManager {
 
     private void formatToHTML(){
         mQuestion = mQuestion.replace(" ","%20");
-        mQuestion.replace("é","e");
-        mQuestion.replace("è","e");
-        mQuestion.replace("ê","e");
-        mQuestion.replace("ç","c");
-        mQuestion.replace("'","%27");
+        mQuestion = mQuestion.replace("é","e");
+        mQuestion = mQuestion.replace("è","e");
+        mQuestion = mQuestion.replace("ê","e");
+        mQuestion = mQuestion.replace("ç","c");
+        mQuestion = mQuestion.replace("'","%27");
 
         mAnswer = mAnswer.replace(" ","%20");
-        mAnswer.replace("é","e");
-        mAnswer.replace("è","e");
-        mAnswer.replace("ê","e");
-        mAnswer.replace("ç","c");
-        mAnswer.replace("'","%27");
+        mAnswer = mAnswer.replace("é","e");
+        mAnswer = mAnswer.replace("è","e");
+        mAnswer = mAnswer.replace("ê","e");
+        mAnswer = mAnswer.replace("ç","c");
+        mAnswer = mAnswer.replace("'","%27");
     }
 }
