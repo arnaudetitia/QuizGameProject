@@ -32,4 +32,8 @@ public class SurvieActionManager extends CLMActionManager {
         mMalus /= 100;
     }
 
+    @Override
+    public int getScore() {
+        return super.getScore();
+    }
 }

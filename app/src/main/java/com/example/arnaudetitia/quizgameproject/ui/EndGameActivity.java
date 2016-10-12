@@ -6,12 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.arnaudetitia.quizgameproject.R;
 
 public class EndGameActivity extends Activity {
 
-    Button back_button;
+    TextView endScoreView;
+    Button backButton;
+
+    int mScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +24,13 @@ public class EndGameActivity extends Activity {
 
         getWindow().getAttributes().windowAnimations = R.style.EndGameStyle;
 
-       back_button = (Button) findViewById(R.id.button_back);
-       back_button.setOnClickListener(new View.OnClickListener() {
+        endScoreView = (TextView) findViewById(R.id.end_score_view);
+        mScore = getIntent().getIntExtra("score",0);
+
+        endScoreView.append(String.valueOf(mScore));
+
+        backButton = (Button) findViewById(R.id.button_back);
+        backButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                finish();

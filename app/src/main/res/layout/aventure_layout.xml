@@ -8,6 +8,7 @@
         style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:id="@+id/progress_aventure_bar"
         android:background="@drawable/progress_aventure_bar"
         android:layout_margin="5dp"

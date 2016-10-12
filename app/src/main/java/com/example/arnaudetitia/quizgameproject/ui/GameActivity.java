@@ -144,6 +144,9 @@ public class GameActivity extends Activity implements OnAnswerChecked{
 
     public void endGame() {
         Intent i = new Intent(GameActivity.this,EndGameActivity.class);
+        if (mMode != Mode.AVENTURE){
+            i.putExtra("score",mManager.getScore());
+        }
         startActivity(i);
         finish();
     }

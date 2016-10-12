@@ -109,4 +109,9 @@ public class AventureActionManager extends ActionManager implements OnLevelSelec
     public boolean isConsecutive() {
         return mConsecutive;
     }
+
+    @Override
+    public int getScore() {
+        return 0;
+    }
 }

@@ -25,4 +25,8 @@ public class CLMActionManager extends ActionManager{
     public void badAction() {
     }
 
+    @Override
+    public int getScore() {
+        return mScore;
+    }
 }

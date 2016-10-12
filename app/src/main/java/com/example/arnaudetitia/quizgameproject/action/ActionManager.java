@@ -9,4 +9,5 @@ abstract public class ActionManager {
 
     abstract public void badAction();
 
+    abstract public int getScore();
 }
