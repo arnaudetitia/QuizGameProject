@@ -6,6 +6,8 @@ import com.example.arnaudetitia.quizgameproject.listener.OnRequestExecuted;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.CookieHandler;
+import java.net.CookieManager;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -53,6 +55,8 @@ public class DBConnector extends AsyncTask<String,String,String>{
 
     @Override
     protected void onPostExecute(String s) {
-        listener.done(s);
+        if (listener != null){
+            listener.done(s);
+        }
     }
 }

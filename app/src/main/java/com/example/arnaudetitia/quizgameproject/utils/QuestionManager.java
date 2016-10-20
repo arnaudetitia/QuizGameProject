@@ -9,8 +9,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLDecoder;
 
 /**
  * Created by Arnaud ETITIA on 07/09/2016.
@@ -19,11 +21,11 @@ public class QuestionManager implements OnQuestionSelected {
 
     String mQuestion;
     String mRightAnswer;
-    String mWrongAnswer;
+    String mLeftAnswer;
 
     TextView mQuestionField;
     Button mRightButton;
-    Button mWrongButton;
+    Button mLeftButton;
 
     String mURL = "http://192.168.1.17:81/androidquizserver/getQuestion.php";
 
@@ -45,23 +47,30 @@ public class QuestionManager implements OnQuestionSelected {
         mRightButton = button;
     }
 
-    public void setWrongButton(Button button){ mWrongButton = button;}
+    public void setLeftButton(Button button){ mLeftButton = button;}
 
     @Override
     public void done(String result) {
-        try {
-            JSONObject object = new JSONObject(result);
-            mQuestion = object.getString("question");
-            mRightAnswer = object.getString("right");
-            JSONArray wrong = object.getJSONArray("wrong");
-            JSONObject wrongAnswerSelected = wrong.getJSONObject((int)(Math.random()*wrong.length()));
-            mWrongAnswer = wrongAnswerSelected.getString("reponse");
+        String sautLigne = "#";
+        String[] data = result.split(sautLigne);
 
-            mQuestionField.setText(mQuestion);
-            mRightButton.setText(mRightAnswer);
-            mWrongButton.setText(mWrongAnswer);
-        } catch (JSONException e) {
+        mQuestion = data[0];
+        mLeftAnswer = data[1];
+        mRightAnswer= data[2];
+
+        mQuestionField.setText(mQuestion);
+        mLeftButton.setText(mLeftAnswer);
+        mRightButton.setText(mRightAnswer);
+
+    }
+
+    private String utf8Decode(String s) {
+        try {
+            byte [] buf = s.getBytes("UTF-8");
+            return new String(buf);
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+            return "plop";
         }
     }
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -74,6 +75,13 @@ public class GameActivity extends Activity implements OnAnswerChecked{
         mLeftButton = (Button) findViewById(R.id.button_left_answer);
         mRightButton = (Button) findViewById(R.id.button_right_answer);
 
+        mQuestionManager = new QuestionManager(mQuestionField);
+
+        mQuestionManager.setRightButton(mLeftButton);
+        mQuestionManager.setLeftButton(mRightButton);
+
+        mCheckAnswerManager = new CheckAnswerManager(this);
+
         mLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,13 +102,10 @@ public class GameActivity extends Activity implements OnAnswerChecked{
             }
         });
 
-        mQuestionManager = new QuestionManager(mQuestionField);
-
-        mCheckAnswerManager = new CheckAnswerManager(this);
+        changeQuestion();
+        initRules();
 
         mFragManager = getFragmentManager();
-        initRules();
-        changeQuestion();
     }
 
 
@@ -157,19 +162,6 @@ public class GameActivity extends Activity implements OnAnswerChecked{
 
         gd.setStroke(10,normalQuestionMode ? Color.GREEN : Color.RED);
 
-        int index = (int)(Math.random()*9)+1;
-
-        boolean leftRightanswer = Math.random() *2 > 1.0;
-
-        if (leftRightanswer){
-            mQuestionManager.setRightButton(mLeftButton);
-            mQuestionManager.setWrongButton(mRightButton);
-        }
-        else {
-            mQuestionManager.setRightButton(mRightButton);
-            mQuestionManager.setWrongButton(mLeftButton);
-        }
-
         mQuestionManager.setQuestion();
     }
 
@@ -193,22 +185,19 @@ public class GameActivity extends Activity implements OnAnswerChecked{
 
     @Override
     public void done(String result) {
-        try {
-            JSONObject object= new JSONObject(result);
-            boolean goodAnswer = object.getBoolean("goodAnswer");
 
-            System.out.println( goodAnswer + " " + normalQuestionMode);
+        boolean goodAnswer = (Integer.parseInt(result)== 1);
 
-            if (goodAnswer == normalQuestionMode){
-                mManager.goodAction();
-            }
-            else {
-                mManager.badAction();
-            }
+        System.out.println( goodAnswer + " " + normalQuestionMode);
 
-            changeQuestion();
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (goodAnswer == normalQuestionMode){
+            mManager.goodAction();
         }
+        else {
+            mManager.badAction();
+        }
+
+        changeQuestion();
+
     }
 }

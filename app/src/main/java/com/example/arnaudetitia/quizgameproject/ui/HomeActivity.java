@@ -2,6 +2,7 @@ package com.example.arnaudetitia.quizgameproject.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
@@ -9,13 +10,20 @@ import android.widget.Button;
 
 import com.example.arnaudetitia.quizgameproject.R;
 
+import com.example.arnaudetitia.quizgameproject.listener.OnGameStarted;
+import com.example.arnaudetitia.quizgameproject.utils.DBConnector;
 import com.example.arnaudetitia.quizgameproject.utils.Mode;
 
-public class HomeActivity extends Activity {
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class HomeActivity extends Activity implements OnGameStarted {
 
     Button mAventureButton;
     Button mCLMButton;
     Button mSurvieButton;
+
+    String mURL = "http://192.168.1.17:81/androidquizserver/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,5 +61,17 @@ public class HomeActivity extends Activity {
                 startActivity(i);
             }
         });
+
+        try{
+            URL url = new URL(mURL);
+            DBConnector connector = new DBConnector(null,url);
+            connector.execute();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void done(String s) {
     }
 }
