@@ -11,7 +11,7 @@ import java.net.URL;
 public class CheckAnswerManager {
 
     GameActivity mGameActivity;
-    String mURL = "http://192.168.1.17:81/androidquizserver/checkGoodAnswer.php?q=";
+    String mURL = "http://192.168.1.17/androidquizserver/checkGoodAnswer.php?q=";
     String mQuestion;
     String mAnswer;
 

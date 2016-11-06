@@ -23,7 +23,7 @@ public class HomeActivity extends Activity implements OnGameStarted {
     Button mCLMButton;
     Button mSurvieButton;
 
-    String mURL = "http://192.168.1.17:81/androidquizserver/";
+    String mURL = "http://192.168.1.17/androidquizserver/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

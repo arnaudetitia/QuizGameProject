@@ -27,7 +27,7 @@ public class QuestionManager implements OnQuestionSelected {
     Button mRightButton;
     Button mLeftButton;
 
-    String mURL = "http://192.168.1.17:81/androidquizserver/getQuestion.php";
+    String mURL = "http://192.168.1.17/androidquizserver/getQuestion.php";
 
     public QuestionManager(TextView questionField) {
         mQuestionField = questionField;

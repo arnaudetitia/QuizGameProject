@@ -20,13 +20,12 @@ public class SurvieActionManager extends CLMActionManager {
 
     @Override
     public void goodAction() {
-        super.goodAction();
+        mScore += mTimer.getProgress()/100;
         mTimer.addToTimer(1);
     }
 
     @Override
     public void badAction() {
-        super.badAction();
         mTimer.subToTimer(mMalus);
         mMalus *= 110;
         mMalus /= 100;

@@ -17,12 +17,13 @@ public class CLMActionManager extends ActionManager{
 
     @Override
     public void goodAction() {
-        this.mScore++;
+        this.mScore+= 100 ;
         mScoreField.setText("Score : " + this.mScore);
     }
 
     @Override
     public void badAction() {
+        this.mScore /= 2;
     }
 
     @Override

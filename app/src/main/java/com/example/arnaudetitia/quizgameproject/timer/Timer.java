@@ -64,6 +64,10 @@ public class Timer {
         mOnPause = false;
     }
 
+    public int getProgress(){
+        return mProgress;
+    }
+
     Runnable mTimerRunnable = new Runnable(){
         @Override
         public void run() {
