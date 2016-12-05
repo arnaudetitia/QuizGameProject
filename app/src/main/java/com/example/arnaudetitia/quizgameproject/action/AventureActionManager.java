@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.widget.ProgressBar;
 
 import com.example.arnaudetitia.quizgameproject.listener.OnLevelSelected;
+import com.example.arnaudetitia.quizgameproject.timer.Timer;
 import com.example.arnaudetitia.quizgameproject.ui.GameActivity;
 import com.example.arnaudetitia.quizgameproject.ui.NextLevelActivity;
 import com.example.arnaudetitia.quizgameproject.utils.DBConnector;
@@ -23,14 +24,16 @@ public class AventureActionManager extends ActionManager implements OnLevelSelec
     int mLevel;
     GameActivity mGameActivity;
     ProgressBar mProgressBar;
+    Timer mTimer;
     int mGoal;
     int mTime;
     boolean mConsecutive;
     String mURL = "http://192.168.1.17:81/androidquizserver/getLevel.php?level=";
 
-    public AventureActionManager(GameActivity ga,ProgressBar mProgressBar) {
+    public AventureActionManager(GameActivity ga, Timer t, ProgressBar mProgressBar) {
         this.mGameActivity = ga;
         this.mProgressBar = mProgressBar;
+        this.mTimer = t;
         mLevel = 1;
     }
 
@@ -50,6 +53,7 @@ public class AventureActionManager extends ActionManager implements OnLevelSelec
 
     @Override
     public void goodAction() {
+        this.mScore += 10;
         mProgressBar.setProgress(mProgressBar.getProgress()+1);
         if (mProgressBar.getProgress() == mGoal){
             mGameActivity.makeWin();
@@ -64,6 +68,7 @@ public class AventureActionManager extends ActionManager implements OnLevelSelec
     }
 
     public void setNextLevel() {
+        mScore += mTimer.getProgress()/1000;
         mLevel++;
         try {
             URL url = new URL(mURL + String.valueOf(mLevel));

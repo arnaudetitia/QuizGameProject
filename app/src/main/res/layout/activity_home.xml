@@ -6,7 +6,7 @@
     android:padding="10dp"
     tools:context=".ui.HomeActivity"
     android:gravity="center_horizontal"
-    android:background="#990099">
+    android:background="@color/backgroundColor">
 
     <TextView
         android:layout_width="wrap_content"

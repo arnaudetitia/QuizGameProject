@@ -119,7 +119,7 @@ public class GameActivity extends Activity implements OnAnswerChecked{
         if (mMode == Mode.AVENTURE){
             mAventureLayout.setVisibility(View.VISIBLE);
             mTimer.setTimer(45);
-            mAventureManager = new AventureActionManager(this,mAventureProgressBar);
+            mAventureManager = new AventureActionManager(this,mTimer,mAventureProgressBar);
             mAventureManager.setGoal(5);
             mAventureManager.resetProgress();
             mAventureManager.setConsecutive(true);

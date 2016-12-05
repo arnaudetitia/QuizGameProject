@@ -20,7 +20,7 @@ public class SurvieActionManager extends CLMActionManager {
 
     @Override
     public void goodAction() {
-        mScore += mTimer.getProgress()/100;
+        mScore += mTimer.getProgress()/1000;
         mTimer.addToTimer(1);
     }
 
@@ -29,6 +29,7 @@ public class SurvieActionManager extends CLMActionManager {
         mTimer.subToTimer(mMalus);
         mMalus *= 110;
         mMalus /= 100;
+        mScoreField.setText("Score : " + this.mScore);
     }
 
     @Override

@@ -8,7 +8,6 @@ import android.widget.TextView;
 public class CLMActionManager extends ActionManager{
 
     TextView mScoreField;
-    int mScore;
 
     public CLMActionManager(TextView view) {
         mScoreField = view;
@@ -17,13 +16,14 @@ public class CLMActionManager extends ActionManager{
 
     @Override
     public void goodAction() {
-        this.mScore+= 100 ;
+        this.mScore += 10 ;
         mScoreField.setText("Score : " + this.mScore);
     }
 
     @Override
     public void badAction() {
-        this.mScore /= 2;
+        this.mScore -= 5;
+        mScoreField.setText("Score : " + this.mScore);
     }
 
     @Override

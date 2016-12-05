@@ -5,6 +5,8 @@ package com.example.arnaudetitia.quizgameproject.action;
  */
 abstract public class ActionManager {
 
+    int mScore;
+
     abstract public void goodAction();
 
     abstract public void badAction();

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     tools:context="com.example.arnaudetitia.quizgameproject.ui.EndGameActivity"
-    android:background="#990099">
+    android:background="@color/backgroundColor">
 
     <TextView
         android:id="@+id/end_text_view"

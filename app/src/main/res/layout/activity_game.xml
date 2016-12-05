@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     tools:context=".ui.GameActivity"
-    android:background="#990099">
+    android:background="@color/backgroundColor">
 
     <include
         android:id="@+id/layout_game_started"

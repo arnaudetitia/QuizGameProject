@@ -22,6 +22,7 @@ public class HomeActivity extends Activity implements OnGameStarted {
     Button mAventureButton;
     Button mCLMButton;
     Button mSurvieButton;
+    Button mSettingButton;
 
     String mURL = "http://192.168.1.17/androidquizserver/";
 
@@ -58,6 +59,15 @@ public class HomeActivity extends Activity implements OnGameStarted {
             public void onClick(View v) {
                 Intent i = new Intent(HomeActivity.this,StartGameActivity.class);
                 i.putExtra("mode",Mode.SURVIE);
+                startActivity(i);
+            }
+        });
+
+        mSettingButton = (Button) findViewById(R.id.button_options);
+        mSettingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeActivity.this,SettingsActivity.class);
                 startActivity(i);
             }
         });
