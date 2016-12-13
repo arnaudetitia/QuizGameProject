@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="colors_array">
+        <item>Violet</item>
+        <item>Orange</item>
+        <item>Turquoise</item>
+        <item>Yellow</item>
+        <item>Vert</item>
+        <!--
+        <item name="purpleBackground">#990099</item>
+        <item name="orangeBackground">#FF4500</item>
+        <item name="turquoiseBackground">#AFEEEE</item>
+        <item name="yellowBackground">#FFFF99</item>
+        <item name="greenBackground">#34C924</item>
+        -->
+    </string-array>
+</resources>

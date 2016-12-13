@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context="com.example.arnaudetitia.quizgameproject.ui.StartGameActivity"
-    android:background="@color/backgroundColor">
+    tools:context=".ui.activity.StartGameActivity"
+    android:background="@color/purpleBackground">
 
     <LinearLayout
         android:orientation="vertical"

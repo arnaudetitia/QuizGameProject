@@ -1,17 +1,13 @@
-package com.example.arnaudetitia.quizgameproject.ui;
+package com.example.arnaudetitia.quizgameproject.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.arnaudetitia.quizgameproject.R;
-import com.example.arnaudetitia.quizgameproject.action.AventureActionManager;
-import com.example.arnaudetitia.quizgameproject.action.CLMActionManager;
-import com.example.arnaudetitia.quizgameproject.action.SurvieActionManager;
 import com.example.arnaudetitia.quizgameproject.utils.Mode;
 
 public class StartGameActivity extends Activity {

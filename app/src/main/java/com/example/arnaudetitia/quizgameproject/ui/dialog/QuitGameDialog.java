@@ -1,4 +1,4 @@
-package com.example.arnaudetitia.quizgameproject.ui;
+package com.example.arnaudetitia.quizgameproject.ui.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.example.arnaudetitia.quizgameproject.R;
+import com.example.arnaudetitia.quizgameproject.ui.activity.GameActivity;
 
 /**
  * Created by Arnaud ETITIA on 19/09/2016.

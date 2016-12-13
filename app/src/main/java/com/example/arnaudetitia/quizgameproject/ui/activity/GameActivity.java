@@ -1,4 +1,4 @@
-package com.example.arnaudetitia.quizgameproject.ui;
+package com.example.arnaudetitia.quizgameproject.ui.activity;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -20,12 +19,10 @@ import com.example.arnaudetitia.quizgameproject.action.CLMActionManager;
 import com.example.arnaudetitia.quizgameproject.action.SurvieActionManager;
 import com.example.arnaudetitia.quizgameproject.listener.OnAnswerChecked;
 import com.example.arnaudetitia.quizgameproject.timer.Timer;
+import com.example.arnaudetitia.quizgameproject.ui.dialog.QuitGameDialog;
 import com.example.arnaudetitia.quizgameproject.utils.CheckAnswerManager;
 import com.example.arnaudetitia.quizgameproject.utils.Mode;
 import com.example.arnaudetitia.quizgameproject.utils.QuestionManager;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class GameActivity extends Activity implements OnAnswerChecked{
 

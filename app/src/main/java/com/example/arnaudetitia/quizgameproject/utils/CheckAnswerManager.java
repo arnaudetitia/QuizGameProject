@@ -1,6 +1,6 @@
 package com.example.arnaudetitia.quizgameproject.utils;
 
-import com.example.arnaudetitia.quizgameproject.ui.GameActivity;
+import com.example.arnaudetitia.quizgameproject.ui.activity.GameActivity;
 
 import java.net.MalformedURLException;
 import java.net.URL;

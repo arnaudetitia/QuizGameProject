@@ -1,4 +1,4 @@
-package com.example.arnaudetitia.quizgameproject.ui;
+package com.example.arnaudetitia.quizgameproject.ui.activity;
 
 import android.app.Activity;
 import android.os.Bundle;

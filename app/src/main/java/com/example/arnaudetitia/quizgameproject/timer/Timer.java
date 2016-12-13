@@ -1,9 +1,8 @@
 package com.example.arnaudetitia.quizgameproject.timer;
 
-import android.util.Log;
 import android.widget.ProgressBar;
 
-import com.example.arnaudetitia.quizgameproject.ui.GameActivity;
+import com.example.arnaudetitia.quizgameproject.ui.activity.GameActivity;
 
 /**
  * Created by Arnaud ETITIA on 06/09/2016.

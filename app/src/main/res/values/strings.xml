@@ -11,4 +11,7 @@
     <string name="button_text_survie">Mode Survie</string>
     <string name="button_text_clm">Mode Contre La Montre</string>
     <string name="button_text_aventure">Mode Aventure</string>
+    <string name="colorDialogTitle">Changer la couleur</string>
+    <string name="valid_setting_dialog">Valider</string>
+    <string name="cancel_seting_dialog">Annuler</string>
 </resources>
