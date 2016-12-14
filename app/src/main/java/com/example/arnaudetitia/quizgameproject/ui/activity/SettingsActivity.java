@@ -3,16 +3,22 @@ package com.example.arnaudetitia.quizgameproject.ui.activity;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.arnaudetitia.quizgameproject.QuizApp;
 import com.example.arnaudetitia.quizgameproject.R;
 import com.example.arnaudetitia.quizgameproject.ui.dialog.ColorSettingDialog;
 
@@ -24,8 +30,6 @@ public class SettingsActivity extends Activity {
     List<String> mSettingList;
     ArrayAdapter<String> mSettingListAdapter;
     ListView mSettingListView;
-
-    final public Context mContext = this;
 
     FragmentManager mFragManager = getFragmentManager();
 
@@ -58,6 +62,16 @@ public class SettingsActivity extends Activity {
             }
         });
 
+        changeColor();
+    }
+
+    protected void changeColor() {
+        SharedPreferences settings = getSharedPreferences("game_settings",MODE_PRIVATE);
+        int color = settings.getInt(QuizApp.BACKGROUND_SETTING, Color.RED);
+
+        ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
+                .findViewById(android.R.id.content)).getChildAt(0);
+        viewGroup.setBackgroundColor(color);
     }
 
     static class Holder{

@@ -1,11 +1,15 @@
 package com.example.arnaudetitia.quizgameproject.ui.activity;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.arnaudetitia.quizgameproject.QuizApp;
 import com.example.arnaudetitia.quizgameproject.R;
 
 public class NextLevelActivity extends Activity {
@@ -34,5 +38,15 @@ public class NextLevelActivity extends Activity {
         int goal = getIntent().getIntExtra("goal",0);
         String consecutive = getIntent().getBooleanExtra("consecutive",false) ? "consécutif" : "";
         mNextLevelField.append(String.format(getString(R.string.next_level_text),goal,consecutive,time));
+        changeColor();
+    }
+
+    protected void changeColor() {
+        SharedPreferences settings = getSharedPreferences("game_settings",MODE_PRIVATE);
+        int color = settings.getInt(QuizApp.BACKGROUND_SETTING, Color.RED);
+
+        ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
+                .findViewById(android.R.id.content)).getChildAt(0);
+        viewGroup.setBackgroundColor(color);
     }
 }

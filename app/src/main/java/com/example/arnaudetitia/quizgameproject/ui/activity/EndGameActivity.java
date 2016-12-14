@@ -2,12 +2,16 @@ package com.example.arnaudetitia.quizgameproject.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.arnaudetitia.quizgameproject.QuizApp;
 import com.example.arnaudetitia.quizgameproject.R;
 
 public class EndGameActivity extends Activity {
@@ -36,6 +40,16 @@ public class EndGameActivity extends Activity {
                finish();
            }
        });
+        changeColor();
 
+    }
+
+    protected void changeColor() {
+        SharedPreferences settings = getSharedPreferences("game_settings",MODE_PRIVATE);
+        int color = settings.getInt(QuizApp.BACKGROUND_SETTING, Color.RED);
+
+        ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
+                .findViewById(android.R.id.content)).getChildAt(0);
+        viewGroup.setBackgroundColor(color);
     }
 }
