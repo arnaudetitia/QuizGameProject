@@ -7,7 +7,6 @@ import com.example.arnaudetitia.quizgameproject.listener.OnLevelSelected;
 import com.example.arnaudetitia.quizgameproject.timer.Timer;
 import com.example.arnaudetitia.quizgameproject.ui.activity.GameActivity;
 import com.example.arnaudetitia.quizgameproject.ui.activity.NextLevelActivity;
-import com.example.arnaudetitia.quizgameproject.utils.DBConnector;
 
 import org.json.JSONArray;
 import org.json.JSONException;

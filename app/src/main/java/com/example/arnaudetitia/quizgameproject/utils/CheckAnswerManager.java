@@ -3,6 +3,7 @@ package com.example.arnaudetitia.quizgameproject.utils;
 import android.app.Activity;
 import android.app.IntentService;
 import android.content.Intent;
+import android.util.Log;
 
 import com.example.arnaudetitia.quizgameproject.ui.activity.GameActivity;
 
@@ -30,8 +31,11 @@ public class CheckAnswerManager extends IntentService{
     @Override
     protected void onHandleIntent(Intent intent) {
         try{
+            mQuestion = intent.getStringExtra(GameActivity.QUESTION_TEXT);
+            mAnswer = intent.getStringExtra(GameActivity.ANSWER_TEXT);
             formatToHTML();
             URL url = new URL(mURL.concat(mQuestion).concat("&r=").concat(mAnswer));
+            Log.d("CheckAnswerManager",url.toString());
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setConnectTimeout(200);
             BufferedReader buffer = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -77,6 +81,7 @@ public class CheckAnswerManager extends IntentService{
     }
 
     private void formatToHTML(){
+
         mQuestion = mQuestion.replace(" ","%20");
         mQuestion = mQuestion.replace("é","e");
         mQuestion = mQuestion.replace("è","e");

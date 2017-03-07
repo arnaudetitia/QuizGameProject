@@ -35,6 +35,8 @@ import com.example.arnaudetitia.quizgameproject.utils.QuestionManager;
 
 public class GameActivity extends Activity {
 
+    public static final String QUESTION_TEXT = "question_text";
+    public static final String ANSWER_TEXT = "answer_text";
     TextView mScoreField;
 
     TextView mQuestionField;
@@ -78,16 +80,11 @@ public class GameActivity extends Activity {
                 return;
             }
 
-            String aresult = intent.getStringExtra("");
+            String aresult = intent.getStringExtra(CheckAnswerManager.CHECK_ANSWER_RESULT);
             if (aresult != null){
                 boolean goodAnswer;
-                try {
-                    goodAnswer = (Integer.parseInt(aresult)== 1);
-                }
-                catch(Exception e){
-                    int a = CheckAnswer.checkAnswer(mCheckAnswerManager.getmQuestion(),mCheckAnswerManager.getmAnswer());
-                    goodAnswer = (a == 1);
-                }
+                goodAnswer = (Integer.parseInt(aresult)== 1);
+
                 System.out.println( goodAnswer + " " + normalQuestionMode);
                 if (goodAnswer == normalQuestionMode){
                     mManager.goodAction();
@@ -139,6 +136,8 @@ public class GameActivity extends Activity {
                 mCheckAnswerManager.setQuestion(mQuestionField.getText().toString());
                 mCheckAnswerManager.setAnswer(b.getText().toString());
                 Intent caservice = new Intent(GameActivity.this,CheckAnswerManager.class);
+                caservice.putExtra(QUESTION_TEXT,mQuestionField.getText().toString());
+                caservice.putExtra(ANSWER_TEXT,b.getText().toString());
                 startService(caservice);
             }
         });
@@ -150,6 +149,8 @@ public class GameActivity extends Activity {
                 mCheckAnswerManager.setQuestion(mQuestionField.getText().toString());
                 mCheckAnswerManager.setAnswer(b.getText().toString());
                 Intent caservice = new Intent(GameActivity.this,CheckAnswerManager.class);
+                caservice.putExtra(QUESTION_TEXT,mQuestionField.getText().toString());
+                caservice.putExtra(ANSWER_TEXT,b.getText().toString());
                 startService(caservice);
             }
         });
