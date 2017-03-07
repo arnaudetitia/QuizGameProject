@@ -1,33 +1,62 @@
 package com.example.arnaudetitia.quizgameproject.utils;
 
+import android.app.Activity;
+import android.app.IntentService;
+import android.content.Intent;
+
 import com.example.arnaudetitia.quizgameproject.ui.activity.GameActivity;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
  * Created by Arnaud ETITIA on 26/09/2016.
  */
-public class CheckAnswerManager {
+public class CheckAnswerManager extends IntentService{
 
-    GameActivity mGameActivity;
     String mURL = "http://192.168.1.17/androidquizserver/checkGoodAnswer.php?q=";
     String mQuestion;
     String mAnswer;
 
-    public CheckAnswerManager(GameActivity mGameActivity) {
-        this.mGameActivity = mGameActivity;
+    public static final String CHECK_ANSWER_RESULT = "check_answer_result";
+
+    public CheckAnswerManager() {
+        super("CheckAnswerManager");
     }
 
-    public void checkAnswer(){
+    @Override
+    protected void onHandleIntent(Intent intent) {
         try{
             formatToHTML();
             URL url = new URL(mURL.concat(mQuestion).concat("&r=").concat(mAnswer));
-            System.out.println(url);
-            DBConnector connector = new DBConnector(mGameActivity,url);
-            connector.execute();
-        } catch (MalformedURLException e) {
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setConnectTimeout(200);
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String result = getFromBufferReader(buffer);
+
+            Intent answerIntent = new Intent();
+            answerIntent.setAction(GameActivity.GameReciever.ACTION_RESP);
+            answerIntent.addCategory(Intent.CATEGORY_DEFAULT);
+            answerIntent.putExtra(CHECK_ANSWER_RESULT,result);
+            sendBroadcast(answerIntent);
+        } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private String getFromBufferReader(BufferedReader buf){
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = buf.readLine()) != null){
+                sb.append(line);
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            return null;
         }
     }
 
@@ -37,6 +66,14 @@ public class CheckAnswerManager {
 
     public void setAnswer(String mAnswer) {
         this.mAnswer = mAnswer;
+    }
+
+    public String getmQuestion() {
+        return mQuestion;
+    }
+
+    public String getmAnswer() {
+        return mAnswer;
     }
 
     private void formatToHTML(){

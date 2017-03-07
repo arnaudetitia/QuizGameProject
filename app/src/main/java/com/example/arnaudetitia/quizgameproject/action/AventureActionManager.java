@@ -72,8 +72,6 @@ public class AventureActionManager extends ActionManager implements OnLevelSelec
         mLevel++;
         try {
             URL url = new URL(mURL + String.valueOf(mLevel));
-            DBConnector connector = new DBConnector(this,url);
-            connector.execute();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

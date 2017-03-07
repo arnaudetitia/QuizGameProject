@@ -13,7 +13,6 @@ import com.example.arnaudetitia.quizgameproject.QuizApp;
 import com.example.arnaudetitia.quizgameproject.R;
 
 import com.example.arnaudetitia.quizgameproject.listener.OnGameStarted;
-import com.example.arnaudetitia.quizgameproject.utils.DBConnector;
 import com.example.arnaudetitia.quizgameproject.utils.Mode;
 
 import java.net.MalformedURLException;
@@ -25,8 +24,6 @@ public class HomeActivity extends Activity implements OnGameStarted {
     Button mCLMButton;
     Button mSurvieButton;
     Button mSettingButton;
-
-    String mURL = "http://192.168.1.17/androidquizserver/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +71,7 @@ public class HomeActivity extends Activity implements OnGameStarted {
             }
         });
 
-        try{
-            URL url = new URL(mURL);
-            DBConnector connector = new DBConnector(null,url);
-            connector.execute();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+
 
         changeColor();
     }

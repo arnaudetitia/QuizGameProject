@@ -23,7 +23,12 @@
         <activity android:name=".ui.activity.EndGameActivity" />
         <activity android:name=".ui.activity.NextLevelActivity" />
         <activity android:name=".ui.activity.StartGameActivity" />
-        <activity android:name=".ui.activity.SettingsActivity"></activity>
+        <activity android:name=".ui.activity.SettingsActivity"/>
+
+        <service android:name=".utils.QuestionManager"
+            android:exported="false"/>
+        <service android:name=".utils.CheckAnswerManager"
+            android:exported="false"/>
     </application>
 
 </manifest>

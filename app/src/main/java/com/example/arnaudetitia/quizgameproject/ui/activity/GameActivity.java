@@ -2,17 +2,23 @@ package com.example.arnaudetitia.quizgameproject.ui.activity;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.IntentService;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.arnaudetitia.offlinemodule.logic.CheckAnswer;
 import com.example.arnaudetitia.quizgameproject.QuizApp;
 import com.example.arnaudetitia.quizgameproject.R;
 
@@ -27,7 +33,7 @@ import com.example.arnaudetitia.quizgameproject.utils.CheckAnswerManager;
 import com.example.arnaudetitia.quizgameproject.utils.Mode;
 import com.example.arnaudetitia.quizgameproject.utils.QuestionManager;
 
-public class GameActivity extends Activity implements OnAnswerChecked{
+public class GameActivity extends Activity {
 
     TextView mScoreField;
 
@@ -46,10 +52,55 @@ public class GameActivity extends Activity implements OnAnswerChecked{
 
     QuestionManager mQuestionManager;
     CheckAnswerManager mCheckAnswerManager;
+    GameReciever mGameReciever;
+
     FragmentManager mFragManager;
 
     int mMode;
     boolean normalQuestionMode;
+
+    public class GameReciever extends BroadcastReceiver{
+        public static final String ACTION_RESP ="com.example.arnaudetitia.quizgameproject.TEXT_TO_DISPLAY";
+
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("GameActivity","changeQuestion()");
+            String qresult =  intent.getStringExtra(QuestionManager.QUESTION_RESULT);
+            if (qresult != null){
+                String sautLigne = "#";
+                String[] data = qresult.split(sautLigne);
+
+                mQuestionField.setText(data[0]);
+                mLeftButton.setText(data[1]);
+                mRightButton.setText(data[2]);
+
+                return;
+            }
+
+            String aresult = intent.getStringExtra("");
+            if (aresult != null){
+                boolean goodAnswer;
+                try {
+                    goodAnswer = (Integer.parseInt(aresult)== 1);
+                }
+                catch(Exception e){
+                    int a = CheckAnswer.checkAnswer(mCheckAnswerManager.getmQuestion(),mCheckAnswerManager.getmAnswer());
+                    goodAnswer = (a == 1);
+                }
+                System.out.println( goodAnswer + " " + normalQuestionMode);
+                if (goodAnswer == normalQuestionMode){
+                    mManager.goodAction();
+                }
+                else {
+                    mManager.badAction();
+                }
+                changeQuestion();
+                return;
+            }
+
+        }
+    }
 
 
     @Override
@@ -75,12 +126,11 @@ public class GameActivity extends Activity implements OnAnswerChecked{
         mLeftButton = (Button) findViewById(R.id.button_left_answer);
         mRightButton = (Button) findViewById(R.id.button_right_answer);
 
-        mQuestionManager = new QuestionManager(mQuestionField);
+        mQuestionManager = new QuestionManager();
 
-        mQuestionManager.setRightButton(mLeftButton);
-        mQuestionManager.setLeftButton(mRightButton);
+        mCheckAnswerManager = new CheckAnswerManager();
 
-        mCheckAnswerManager = new CheckAnswerManager(this);
+        mGameReciever = new GameReciever();
 
         mLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +138,8 @@ public class GameActivity extends Activity implements OnAnswerChecked{
                 Button b = (Button) v;
                 mCheckAnswerManager.setQuestion(mQuestionField.getText().toString());
                 mCheckAnswerManager.setAnswer(b.getText().toString());
-                mCheckAnswerManager.checkAnswer();
+                Intent caservice = new Intent(GameActivity.this,CheckAnswerManager.class);
+                startService(caservice);
             }
         });
 
@@ -98,7 +149,8 @@ public class GameActivity extends Activity implements OnAnswerChecked{
                 Button b = (Button) v;
                 mCheckAnswerManager.setQuestion(mQuestionField.getText().toString());
                 mCheckAnswerManager.setAnswer(b.getText().toString());
-                mCheckAnswerManager.checkAnswer();
+                Intent caservice = new Intent(GameActivity.this,CheckAnswerManager.class);
+                startService(caservice);
             }
         });
 
@@ -123,6 +175,16 @@ public class GameActivity extends Activity implements OnAnswerChecked{
     protected void onResume() {
         super.onResume();
         mTimer.startTimer();
+
+        IntentFilter filter = new IntentFilter(GameReciever.ACTION_RESP);
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        registerReceiver(mGameReciever,filter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(mGameReciever);
     }
 
     private void initRules() {
@@ -172,7 +234,9 @@ public class GameActivity extends Activity implements OnAnswerChecked{
 
         gd.setStroke(10,normalQuestionMode ? Color.GREEN : Color.RED);
 
-        mQuestionManager.setQuestion();
+        Log.d("GameActivity","changeQuestion()");
+        Intent qManager = new Intent(this,QuestionManager.class);
+        startService(qManager);
     }
 
     public void makeWin(){
@@ -193,21 +257,7 @@ public class GameActivity extends Activity implements OnAnswerChecked{
         mTimer.restartTimer();
     }
 
-    @Override
-    public void done(String result) {
-
-        boolean goodAnswer = (Integer.parseInt(result)== 1);
-
-        System.out.println( goodAnswer + " " + normalQuestionMode);
-
-        if (goodAnswer == normalQuestionMode){
-            mManager.goodAction();
-        }
-        else {
-            mManager.badAction();
-        }
-
-        changeQuestion();
-
+    public CheckAnswerManager getCheckAnswerManager() {
+        return mCheckAnswerManager;
     }
 }

@@ -4,10 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="purpleBackground">#990099</color>
-    <color name="orangeBackground">#FF4500</color>
-    <color name="turquoiseBackground">#AFEEEE</color>
-    <color name="yellowBackground">#FFFF99</color>
+    <color name="purpleBackground">#993399</color>
+    <color name="orangeBackground">#FF4525</color>
+    <color name="turquoiseBackground">#40E0D0</color>
+    <color name="yellowBackground">#FFFF00</color>
     <color name="greenBackground">#34C924</color>
 
 </resources>

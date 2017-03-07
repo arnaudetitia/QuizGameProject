@@ -10,8 +10,8 @@ public class CLMActionManager extends ActionManager{
     TextView mScoreField;
 
     public CLMActionManager(TextView view) {
-        mScoreField = view;
-        this.mScore = 0;
+            mScoreField = view;
+            this.mScore = 0;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class CLMActionManager extends ActionManager{
 
     @Override
     public void badAction() {
-        this.mScore -= 5;
+        this.mScore /= 2;
         mScoreField.setText("Score : " + this.mScore);
     }
 

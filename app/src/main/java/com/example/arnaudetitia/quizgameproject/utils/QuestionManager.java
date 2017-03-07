@@ -1,15 +1,25 @@
 package com.example.arnaudetitia.quizgameproject.utils;
 
+import android.app.IntentService;
+import android.content.Intent;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.arnaudetitia.offlinemodule.beans.Question;
+import com.example.arnaudetitia.offlinemodule.logic.GetQuestion;
 import com.example.arnaudetitia.quizgameproject.listener.OnQuestionSelected;
+import com.example.arnaudetitia.quizgameproject.ui.activity.GameActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.ConnectException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -17,61 +27,47 @@ import java.net.URLDecoder;
 /**
  * Created by Arnaud ETITIA on 07/09/2016.
  */
-public class QuestionManager implements OnQuestionSelected {
+public class QuestionManager extends IntentService {
 
-    String mQuestion;
-    String mRightAnswer;
-    String mLeftAnswer;
-
-    TextView mQuestionField;
-    Button mRightButton;
-    Button mLeftButton;
 
     String mURL = "http://192.168.1.17/androidquizserver/getQuestion.php";
 
-    public QuestionManager(TextView questionField) {
-        mQuestionField = questionField;
-    }
+    public static final String QUESTION_RESULT = "question_result";
 
-    public void setQuestion(){
-        try {
-            URL url = new URL(mURL);
-            DBConnector connector = new DBConnector(QuestionManager.this,url);
-            connector.execute();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+    public QuestionManager() {
+        super("QuestionManager");
     }
-
-    public void setRightButton(Button button){
-        mRightButton = button;
-    }
-
-    public void setLeftButton(Button button){ mLeftButton = button;}
 
     @Override
-    public void done(String result) {
-        String sautLigne = "#";
-        String[] data = result.split(sautLigne);
-
-        mQuestion = data[0];
-        mLeftAnswer = data[1];
-        mRightAnswer= data[2];
-
-        mQuestionField.setText(mQuestion);
-        mLeftButton.setText(mLeftAnswer);
-        mRightButton.setText(mRightAnswer);
-
-    }
-
-    private String utf8Decode(String s) {
+    protected void onHandleIntent(Intent intent) {
+        Log.d("QuestionManager","onHandleIntent()");
         try {
-            byte [] buf = s.getBytes("UTF-8");
-            return new String(buf);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return "plop";
+            URL url = new URL(mURL);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setConnectTimeout(200);
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String result = getFromBufferReader(buffer);
+
+            Intent questionIntent = new Intent();
+            questionIntent.setAction(GameActivity.GameReciever.ACTION_RESP);
+            questionIntent.addCategory(Intent.CATEGORY_DEFAULT);
+            questionIntent.putExtra(QUESTION_RESULT,result);
+            sendBroadcast(questionIntent);
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
+    private String getFromBufferReader(BufferedReader buf){
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = buf.readLine()) != null){
+                sb.append(line);
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
